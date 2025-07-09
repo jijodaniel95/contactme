@@ -57,14 +57,6 @@ A simple REST API service for handling contact form submissions and sending them
 }
 ```
 
-## Legacy Endpoint
-
-For backward compatibility, the following endpoint is also supported:
-
-**Endpoint:** `POST /contact/create`
-
-This endpoint has the same parameters and responses as `POST /api/contacts`.
-
 ## Google Cloud PubSub
 
 The API publishes messages to a PubSub topic named `contact-form` with the following payload structure:
