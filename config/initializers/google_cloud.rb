@@ -13,7 +13,7 @@ elsif Rails.env.test?
 end
 
 # Set the credentials path if the file exists
-if File.exist?(credentials_path)
+if (Rails.env.development? || Rails.env.test?) && File.exist?(credentials_path)
   ENV["GOOGLE_APPLICATION_CREDENTIALS"] = credentials_path.to_s
   Rails.logger.info("Google Cloud credentials loaded from: #{credentials_path}")
 else
