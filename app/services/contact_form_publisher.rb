@@ -12,9 +12,9 @@ class ContactFormPublisher
             
             payload = {
                 fullName: full_name,
-                email: email,
+                sender: email,
                 subject: subject,
-                messageText: message
+                message: message
             }.to_json
             
             Rails.logger.info("Publishing to Pub/Sub topic: #{TOPIC_NAME}")
