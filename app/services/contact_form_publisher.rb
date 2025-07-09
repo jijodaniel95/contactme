@@ -20,7 +20,7 @@ class ContactFormPublisher
             Rails.logger.info("Publishing to Pub/Sub topic: #{TOPIC_NAME}")
             Rails.logger.info("Payload: #{payload}")
             
-            message_id = topic.publish_async(payload) do |result|
+            message_id = topic.publish_message(payload) do |result|
                 if result.succeeded?
                     Rails.logger.info("Message published with ID: #{result.message_id}")
                 else
