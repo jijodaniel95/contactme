@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2' # or your desired Ruby version
+
       - name: Install importmap
         run: bundle exec rake importmap:install
       - name: Checkout code
