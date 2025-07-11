@@ -5,8 +5,8 @@ require "action_view/railtie"
 require "action_mailer/railtie"
 require "active_job/railtie"
 require "action_cable/engine"
-require "sprockets/railtie"
 # require "active_record/railtie" # Removed to disable database
+# require "sprockets/railtie" # Removed to avoid asset/database errors
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
