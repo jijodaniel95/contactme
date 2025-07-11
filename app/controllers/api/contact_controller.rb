@@ -1,14 +1,14 @@
 module Api
   class ContactController < ApplicationController
     skip_before_action :verify_authenticity_token
-    
+
     # POST /api/contacts
     def create
       # Validate required parameters
       unless valid_params?(params)
         return render json: { status: "error", errors: missing_params }, status: :bad_request
       end
-      
+
       begin
         # Publish to PubSub
         publisher = ContactFormPublisher.new
@@ -18,7 +18,7 @@ module Api
           params[:subject],
           params[:message] || params[:messageText]
         )
-        
+
         if success
           # Log successful request
           Rails.logger.info("Contact form submitted successfully")
@@ -32,20 +32,20 @@ module Api
         render json: { status: "error", message: e.message }, status: :internal_server_error
       end
     end
-    
+
     # GET /api/contacts/:id
-   
+
     private
-    
+
     def valid_params?(params)
       name = params[:full_name].present? || params[:fullName].present?
       email = params[:email].present?
       subject = params[:subject].present?
       message = params[:message].present? || params[:messageText].present?
-      
+
       name && email && subject && message
     end
-    
+
     def missing_params
       errors = []
       errors << "Name is required" unless params[:full_name].present? || params[:fullName].present?
@@ -55,4 +55,4 @@ module Api
       errors
     end
   end
-end 
+end

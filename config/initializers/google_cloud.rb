@@ -18,7 +18,7 @@ if (Rails.env.development? || Rails.env.test?) && File.exist?(credentials_path)
   Rails.logger.info("Google Cloud credentials loaded from: #{credentials_path}")
 else
   Rails.logger.warn("Google Cloud credentials file not found at: #{credentials_path}")
-  
+
   # For development/test, we'll create a minimal mock credential file
   if Rails.env.development? || Rails.env.test?
     mock_credentials_path = Rails.root.join("config", "mock_credentials.json")
@@ -28,8 +28,8 @@ else
         file.write('{"type":"service_account","project_id":"mock-project"}')
       end
     end
-    
+
     ENV["GOOGLE_APPLICATION_CREDENTIALS"] = mock_credentials_path.to_s
     Rails.logger.info("Using mock Google credentials for #{Rails.env} at: #{mock_credentials_path}")
   end
-end 
+end
