@@ -19,16 +19,8 @@ class ContactFormPublisher
 
             Rails.logger.info("Publishing to Pub/Sub topic: #{TOPIC_NAME}")
             Rails.logger.info("Payload: #{payload}")
-
-            message_id = topic.publish(payload) do |result|
-                if result.succeeded?
-                    Rails.logger.info("Message published with ID: #{result.message_id}")
-                else
-                    Rails.logger.error("Failed to publish message: #{result.error}")
-                end
-            end
-
-            Rails.logger.info("Message queued with ID: #{message_id}")
+            message_id = topic.publish(payload)
+            Rails.logger.info("Message published with ID: #{message_id}")
             true
         rescue => e
             Rails.logger.error("Error publishing to Pub/Sub: #{e.message}")
